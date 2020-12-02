@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    
+    <div class="card" id="card">
+        <h1>Your guide to the hot zone.</h1>
+        <p>Lorem ipsum dolor sit, 
+            amet consectetur adipisicing elit. 
+            Dolore, incidunt culpa illum similique 
+            architecto error autem dolorem at nemo 
+            porro veniam eius iste dicta expedita!
+        </p>
+    </div>
+    <style>
+        .card::before, .card::after {
+            content: "";
+            position: absolute;
+            height: 300px;
+            width: 34%;
+            background: white;
+            top: 0;
+            right: 0;
+            z-index: -2;
+        }
+        .card::after {
+            width: 0;
+            background: #004cff;
+            left: 0;
+            z-index: -1;
+        }
+        p::before {
+            content: "";
+            position: absolute;
+            height: 80%;
+            top: 2em;
+            left: 0;
+            width: 5px;
+            background: darkblue;
+        }
+    </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js" integrity="sha512-IQLehpLoVS4fNzl7IfH8Iowfm5+RiMGtHykgZJl9AWMgqx0AmJ6cRWcB+GaGVtIsnC4voMfm8f2vwtY+6oPjpQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/CSSRulePlugin.min.js" integrity="sha512-6MT8e40N5u36Um5SXKtwZmoKcCSg1XaKtexnXZPpQ4iJDHrBEHXKz37fnDovXezsaCd4oKCH5Y+vrcl7qpLPoA==" crossorigin="anonymous"></script>
+    <script>
+        var card = document.getElementById('card');
+
+        var before = CSSRulePlugin.getRule(".card::before");
+        var after = CSSRulePlugin.getRule(".card::after");
+
+        var tl = gsap.timeline({defaults: {ease: "power2.inOut"}});
+
+        tl.to(before, {
+            width: '100%'
+        });
+
+        tl.pause();
+
+        card.addEventListener('mouseenter', () => {
+            tl.play();
+        });
+
+        card.addEventListener('mouseleave', () => {
+            tl.reverse();
+        });
+    </script>
+</body>
+</html>
